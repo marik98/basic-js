@@ -26,12 +26,11 @@ function getDNSStats(domains) {
   const stats = {};
   
   for (let domain of domains) {
-    const parts = domain.split('.');
+    const parts = domain.split('.').reverse();
     let currentDomain = '';
     
-    // Идем с конца (от зоны .ru к началу)
-    for (let i = parts.length - 1; i >= 0; i--) {
-      currentDomain = '.' + parts[i] + currentDomain;
+    for (let part of parts) {
+      currentDomain += '.' + part;
       stats[currentDomain] = (stats[currentDomain] || 0) + 1;
     }
   }
