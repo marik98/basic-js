@@ -14,8 +14,15 @@ const { NotImplementedError } = require('../lib');
 function getSeason(date) {
   if (!date) return 'Unable to determine the time of year!';
   
-  // Проверяем, что это настоящий объект Date, и что внутри него валидное время (не NaN)
-  if (!(date instanceof Date) || isNaN(date.getTime()) || Object.prototype.toString.call(date) !== '[object Date]') {
+  try {
+    
+    Date.prototype.getTime.call(date);
+  } catch (e) {
+    throw new Error('Invalid date!');
+  }
+
+  // Проверка на невалидную дату )
+  if (isNaN(date.getTime())) {
     throw new Error('Invalid date!');
   }
   
@@ -26,7 +33,6 @@ function getSeason(date) {
   if (month >= 5 && month <= 7) return 'summer';
   return 'autumn';
 }
-
 module.exports = {
   getSeason
 };
