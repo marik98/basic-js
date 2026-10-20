@@ -20,7 +20,7 @@ function getCommonCharacterCount(s1, s2) {
     const index = chars2.indexOf(char);
     if (index !== -1) {
       count++;
-      chars2.splice(index, 1); // Удаляем найденный символ
+      chars2.splice(index, 1); 
     }
   }
   
